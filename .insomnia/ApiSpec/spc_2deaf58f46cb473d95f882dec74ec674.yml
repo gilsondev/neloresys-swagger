@@ -1,0 +1,578 @@
+_id: spc_2deaf58f46cb473d95f882dec74ec674
+type: ApiSpec
+parentId: wrk_2b93c5e120af477d8b45b8022a044a9a
+modified: 1608664158047
+created: 1608658484790
+fileName: Neloresys
+contents: "
+
+  openapi: 3.0.0
+
+  info:
+
+  \  description: \"\"
+
+  \  version: 1.0.2
+
+  \  title: Neloresys API
+
+  \  contact:
+
+  \    email: me@gilsondev.in
+
+  \  license:
+
+  \    name: MIT
+
+  \    url: https://github.com/gilsondev/neloresys/blob/main/LICENSE
+
+  tags:
+
+  \  - name: \"farm\"
+
+  \    description: \"Recurso relacionado a fazendas\"
+
+  \  - name: \"lots\"
+
+  \    description: \"Recurso relacionado aos lotes de uma fazenda\"
+
+  paths:
+
+  \  /farms:
+
+  \    get:
+
+  \      tags:
+
+  \        - \"farm\"
+
+  \      summary: \"Lista fazendas do usuario logado\"
+
+  \      operationId: \"listFarms\"
+
+  \      produces:
+
+  \        - \"application/json\"
+
+  \      responses:
+
+  \        \"200\":
+
+  \          description: \"Retorna lista de fazendas\"
+
+  \          schema:
+
+  \            type: \"array\"
+
+  \            items:
+
+  \              $ref: \"#/definitions/Farm\"
+
+  \    post:
+
+  \      tags:
+
+  \        - \"farm\"
+
+  \      summary: \"Cria uma nova fazenda\"
+
+  \      operationId: \"addFarm\"
+
+  \      consumes:
+
+  \        - \"application/json\"
+
+  \      produces:
+
+  \        - \"application/json\"
+
+  \      parameters:
+
+  \        - in: \"body\"
+
+  \          name: \"body\"
+
+  \          description: \"Objeto da fazenda\"
+
+  \          required: true
+
+  \          schema:
+
+  \            $ref: \"#/definitions/Farm\"
+
+  \      responses:
+
+  \        \"405\":
+
+  \          description: \"Entrada invalida\"
+
+  \        \"201\":
+
+  \          description: \"Fazendo criado com sucesso\"
+
+  \  /farms/{uid}:
+
+  \    get:
+
+  \      tags:
+
+  \        - \"farm\"
+
+  \      summary: \"Lista detalhes da Fazenda\"
+
+  \      operationId: \"fetchFarm\"
+
+  \      produces:
+
+  \        - \"application/json\"
+
+  \      responses:
+
+  \        \"200\":
+
+  \          description: \"Retorna os dados da fazenda\"
+
+  \          schema:
+
+  \            $ref: \"#/definitions/Farm\"
+
+  \    put:
+
+  \      tags:
+
+  \        - \"farm\"
+
+  \      summary: \"Atualiza uma fazenda\"
+
+  \      operationId: \"updateFarm\"
+
+  \      consumes:
+
+  \        - \"application/json\"
+
+  \      produces:
+
+  \        - \"application/json\"
+
+  \      parameters:
+
+  \        - in: \"body\"
+
+  \          name: \"body\"
+
+  \          description: \"Objeto da fazenda\"
+
+  \          required: true
+
+  \          schema:
+
+  \            $ref: \"#/definitions/Farm\"
+
+  \      responses:
+
+  \        \"400\":
+
+  \          description: \"Dados invalidos\"
+
+  \        \"404\":
+
+  \          description: \"Fazenda nao encontrada\"
+
+  \        \"405\":
+
+  \          description: \"Entrada invalida\"
+
+  \        \"204\":
+
+  \          description: \"Fazendo atualizada com sucesso\"
+
+  \    delete:
+
+  \      tags:
+
+  \        - \"farm\"
+
+  \      summary: \"Remove uma fazenda\"
+
+  \      operationId: \"deleteFarm\"
+
+  \      responses:
+
+  \        \"404\":
+
+  \          description: \"Fazenda nao encontrada\"
+
+  \        \"204\":
+
+  \          description: \"Fazenda removida com sucesso\"
+
+  \  /farms/{uid}/lots:
+
+  \    get:
+
+  \      tags:
+
+  \        - \"lots\"
+
+  \      summary: \"Lista os lotes de uma fazenda\"
+
+  \      operationId: \"listLots\"
+
+  \      produces:
+
+  \        - \"application/json\"
+
+  \      responses:
+
+  \        \"200\":
+
+  \          description: \"Retorna lista de lotes de uma fazenda\"
+
+  \          schema:
+
+  \            type: \"array\"
+
+  \            items:
+
+  \              $ref: \"#/definitions/Lot\"
+
+  \    post:
+
+  \      tags:
+
+  \        - \"lots\"
+
+  \      summary: \"Cria um novo lote de uma fazenda\"
+
+  \      operationId: \"addLot\"
+
+  \      consumes:
+
+  \        - \"application/json\"
+
+  \      produces:
+
+  \        - \"application/json\"
+
+  \      parameters:
+
+  \        - in: \"body\"
+
+  \          name: \"body\"
+
+  \          description: \"Objeto do Lote\"
+
+  \          required: true
+
+  \          schema:
+
+  \            $ref: \"#/definitions/Lot\"
+
+  \      responses:
+
+  \        \"405\":
+
+  \          description: \"Entrada invalida\"
+
+  \        \"201\":
+
+  \          description: \"Fazendo criado com sucesso\"
+
+  \  /farms/{uid}/lots/{uid}:
+
+  \    get:
+
+  \      tags:
+
+  \        - \"lots\"
+
+  \      summary: \"Lista detalhes do Lote da fazenda\"
+
+  \      operationId: \"fetchLot\"
+
+  \      produces:
+
+  \        - \"application/json\"
+
+  \      responses:
+
+  \        \"200\":
+
+  \          description: \"Retorna os dados do lote\"
+
+  \          schema:
+
+  \            $ref: \"#/definitions/Lot\"
+
+  \    put:
+
+  \      tags:
+
+  \        - \"lots\"
+
+  \      summary: \"Atualiza um lote\"
+
+  \      operationId: \"updateLot\"
+
+  \      consumes:
+
+  \        - \"application/json\"
+
+  \      produces:
+
+  \        - \"application/json\"
+
+  \      parameters:
+
+  \        - in: \"body\"
+
+  \          name: \"body\"
+
+  \          description: \"Objeto do Lote\"
+
+  \          required: true
+
+  \          schema:
+
+  \            $ref: \"#/definitions/Lot\"
+
+  \      responses:
+
+  \        \"400\":
+
+  \          description: \"Dados invalidos\"
+
+  \        \"404\":
+
+  \          description: \"Lote nao encontrado\"
+
+  \        \"405\":
+
+  \          description: \"Entrada invalida\"
+
+  \        \"204\":
+
+  \          description: \"Lote atualizado com sucesso\"
+
+  \    delete:
+
+  \      tags:
+
+  \        - \"lots\"
+
+  \      summary: \"Remove um lote\"
+
+  \      operationId: \"deleteLot\"
+
+  \      responses:
+
+  \        \"404\":
+
+  \          description: \"Lote nao encontrado\"
+
+  \        \"204\":
+
+  \          description: \"Lote removido com sucesso\"
+
+  definitions:
+
+  \  Farm:
+
+  \    type: \"object\"
+
+  \    required:
+
+  \      - \"name\"
+
+  \      - \"abbreviation\"
+
+  \    propeties:
+
+  \      uid:
+
+  \        type: \"uuid4\"
+
+  \      name:
+
+  \        type: \"string\"
+
+  \        example: \"Fazenda Nelore\"
+
+  \      abbreviation:
+
+  \        type: \"string\"
+
+  \        example: \"FN\"
+
+  \  Lot:
+
+  \    type: \"object\"
+
+  \    required:
+
+  \      - \"name\"
+
+  \    properties:
+
+  \      uid:
+
+  \        type: \"string\"
+
+  \        format: \"uuid\"
+
+  \      name:
+
+  \        type: \"string\"
+
+  \        example: \"Nelore - Lote 1\"
+
+  \      created_at:
+
+  \        type: \"string\"
+
+  \        format: \"date-time\"
+
+  \      enabled:
+
+  \        type: \"boolean\"
+
+  \        default: true
+
+  \  Pasture:
+
+  \    type: \"object\"
+
+  \    required:
+
+  \      - \"name\"
+
+  \    properties:
+
+  \      uid:
+
+  \        type: \"string\"
+
+  \        format: \"uuid\"
+
+  \      name:
+
+  \        type: \"string\"
+
+  \      total_animals:
+
+  \        type: \"integer\"
+
+  \        format: \"int32\"
+
+  \      enabled:
+
+  \        type: \"boolean\"
+
+  \        default: true
+
+  \  Animal:
+
+  \    type: \"object\"
+
+  \    required:
+
+  \      - \"code\"
+
+  \      - \"born_in\"
+
+  \      - \"race\"
+
+  \      - \"sex\"
+
+  \      - \"weight\"
+
+  \    properties:
+
+  \      uid:
+
+  \        type: \"string\"
+
+  \        format: \"uuid\"
+
+  \      code:
+
+  \        type: \"string\"
+
+  \      born_in:
+
+  \        type: \"string\"
+
+  \        format: \"date\"
+
+  \      race:
+
+  \        type: \"string\"
+
+  \      sex:
+
+  \        type: \"string\"
+
+  \        enum:
+
+  \          - \"macho\"
+
+  \          - \"femea\"
+
+  \      weight:
+
+  \        type: \"integer\"
+
+  \        format: \"float\"
+
+  \  Food:
+
+  \    type: \"object\"
+
+  \    required:
+
+  \      - \"animal_uid\"
+
+  \      - \"description\"
+
+  \      - \"pasture_uid\"
+
+  \      - \"weight\"
+
+  \    properties:
+
+  \      uid:
+
+  \        type: \"string\"
+
+  \        format: \"uuid\"
+
+  \      animal_uid:
+
+  \        type: \"string\"
+
+  \        format: \"uuid\"
+
+  \      description:
+
+  \        type: \"string\"
+
+  \      created_at:
+
+  \        type: \"string\"
+
+  \        format: \"date-time\"
+
+  \      pasture_uid:
+
+  \        type: \"string\"
+
+  \        format: \"uuid\"
+
+  \      weight:
+
+  \        type: \"integer\"
+
+  \        format: \"float\"
+
+  \        "
+contentType: yaml
